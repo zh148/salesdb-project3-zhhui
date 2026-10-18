@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2480" height="3508" viewBox="0 0 2480 3508">
+  <style>
+    .bg { fill:#eef3f7; }
+    .titlebar { fill:#2b579a; }
+    .titletext { fill:#fff; font-family:Segoe UI, Arial, sans-serif; font-size:28px; font-weight:700; }
+    .panel { fill:#ffffff; stroke:#cfdce6; }
+    .panel-title { fill:#0b3b76; font-family:Segoe UI, Arial, sans-serif; font-size:14px; font-weight:600; }
+    .panel-sub { fill:#444; font-family:Segoe UI, Arial, sans-serif; font-size:12px; }
+    .foot { fill:#333; font-family:Segoe UI, Arial, sans-serif; font-size:14px; }
+    .meta { fill:#666; font-family:Segoe UI, Arial, sans-serif; font-size:12px; }
+    .small { font-family:Consolas, monospace; font-size:11px; fill:#222; }
+  </style>
+
+  <rect x="0" y="0" width="2480" height="3508" class="bg" />
+  <rect x="60" y="40" width="2360" height="90" class="titlebar" rx="8" ry="8" />
+  <text x="100" y="100" class="titletext">实验汇总：SalesDB 数据表创建与约束验证（封面汇总）</text>
+  <text x="100" y="130" class="meta">学号：202520801012 &nbsp;&nbsp; 姓名：张辉 &nbsp;&nbsp; 项目3 — 数据表创建</text>
+
+  <g transform="translate(80,180)">
+    <rect width="1120" height="420" class="panel" rx="8" ry="8" />
+    <rect x="12" y="12" width="1096" height="36" fill="#2b579a" rx="4" ry="4" />
+    <text x="26" y="38" class="panel-title" fill="#fff">截图1：对象资源管理器 — Tables 列表</text>
+    <text x="26" y="64" class="panel-sub small">显示 Products、Customers、Orders、OrderDetails 四张表</text>
+    <g transform="translate(24,90)">
+      <rect x="0" y="0" width="480" height="300" fill="#ffffff" stroke="#d0d7de"/>
+      <text x="12" y="26" class="small">对象资源管理器</text>
+      <text x="28" y="56" class="small">└─ 数据库</text>
+      <text x="48" y="86" class="small">└─ SalesDB</text>
+      <text x="68" y="116" class="small">└─ 表</text>
+      <text x="88" y="146" class="small">├─ Customers</text>
+      <text x="88" y="170" class="small">├─ OrderDetails</text>
+      <text x="88" y="194" class="small">├─ Orders</text>
+      <text x="88" y="218" class="small">└─ Products</text>
+    </g>
+    <text x="24" y="386" class="meta">步骤1：SSMS 对象资源管理器 — 作者：202520801012 张辉</text>
+  </g>
+
+  <g transform="translate(1280,180)">
+    <rect width="1120" height="420" class="panel" rx="8" ry="8" />
+    <rect x="12" y="12" width="1096" height="36" fill="#2b579a" rx="4" ry="4" />
+    <text x="26" y="38" class="panel-title" fill="#fff">截图2：Products 表设计视图</text>
+    <text x="26" y="64" class="panel-sub small">列名、数据类型、主键与默认值、CHECK</text>
+    <g transform="translate(24,90)">
+      <rect x="0" y="0" width="720" height="300" fill="#fff" stroke="#d0d7de"/>
+      <text x="12" y="30" class="small">ProductID    char(6)    否    主键 (PK)</text>
+      <text x="12" y="60" class="small">ProductName  nvarchar(50) 否</text>
+      <text x="12" y="90" class="small">UnitPrice    decimal(10,2) 否  CHECK: UnitPrice &gt;= 0</text>
+      <text x="12" y="120" class="small">StockQty     int  否  默认值 0</text>
+      <text x="12" y="150" class="small">IsOnSale     bit  否  默认值 1</text>
+    </g>
+    <text x="24" y="386" class="meta">步骤3：Products 设计视图 — 作者：202520801012 张辉</text>
+  </g>
+
+  <g transform="translate(80,640)">
+    <rect width="1120" height="420" class="panel" rx="8" ry="8" />
+    <rect x="12" y="12" width="1096" height="36" fill="#2b579a" rx="4" ry="4" />
+    <text x="26" y="38" class="panel-title" fill="#fff">截图3：sp_help 'Orders' 结果</text>
+    <text x="26" y="64" class="panel-sub small">显示主键、外键与 CHECK 约束</text>
+    <g transform="translate(24,90)">
+      <rect x="0" y="0" width="1096" height="300" fill="#fff" stroke="#d0d7de"/>
+      <text x="12" y="34" class="small">TABLE: Orders</text>
+      <text x="12" y="64" class="small">- PK: OrderID</text>
+      <text x="12" y="94" class="small">- FK_Orders_Customers: FOREIGN KEY CustomerID → Customers(CustomerID)</text>
+      <text x="12" y="124" class="small">- CK_Orders_Status: CHECK OrderStatus IN ('待付款','已付款','已发货','已完成','已取消')</text>
+    </g>
+    <text x="24" y="386" class="meta">步骤5：sp_help 'Orders' — 作者：202520801012 张辉</text>
+  </g>
+
+  <g transform="translate(1280,640)">
+    <rect width="1120" height="420" class="panel" rx="8" ry="8" />
+    <rect x="12" y="12" width="1096" height="36" fill="#2b579a" rx="4" ry="4" />
+    <text x="26" y="38" class="panel-title" fill="#fff">截图4：外键约束报错（插入不存在 CustomerID）</text>
+    <text x="26" y="64" class="panel-sub small">INSERT INTO Orders (CustomerID) VALUES ('C99999');</text>
+    <g transform="translate(24,90)">
+      <rect x="0" y="0" width="1096" height="300" fill="#fff" stroke="#d0d7de"/>
+      <text x="12" y="34" class="small" fill="#a00000">Msg 547, Level 16</text>
+      <text x="12" y="64" class="small">The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Orders_Customers".</text>
+      <text x="12" y="94" class="small">The conflict occurred in database "SalesDB", table "dbo.Customers".</text>
+    </g>
+    <text x="24" y="386" class="meta">步骤6：外键约束报错 — 作者：202520801012 张辉</text>
+  </g>
+
+  <g transform="translate(80,1100)">
+    <rect width="1120" height="420" class="panel" rx="8" ry="8" />
+    <rect x="12" y="12" width="1096" height="36" fill="#2b579a" rx="4" ry="4" />
+    <text x="26" y="38" class="panel-title" fill="#fff">截图5：CHECK 约束报错（数量为负）</text>
+    <text x="26" y="64" class="panel-sub small">INSERT INTO OrderDetails (...) VALUES (1, 'P00002', -1, 89.00);</text>
+    <g transform="translate(24,90)">
+      <rect x="0" y="0" width="1096" height="300" fill="#fff" stroke="#d0d7de"/>
+      <text x="12" y="34" class="small" fill="#a00000">Msg 547, Level 16</text>
+      <text x="12" y="64" class="small">The INSERT statement conflicted with the CHECK constraint "CK_Details_Quantity".</text>
+      <text x="12" y="94" class="small">The conflict occurred in table "dbo.OrderDetails".</text>
+    </g>
+    <text x="24" y="386" class="meta">步骤6：CHECK 约束报错 — 作者：202520801012 张辉</text>
+  </g>
+
+  <g transform="translate(1280,1100)">
+    <rect width="1120" height="420" class="panel" rx="8" ry="8" />
+    <rect x="12" y="12" width="1096" height="36" fill="#2b579a" rx="4" ry="4" />
+    <text x="26" y="38" class="panel-title" fill="#fff">截图6：OrderDetails 查询结果</text>
+    <text x="26" y="64" class="panel-sub small">SELECT * FROM OrderDetails; 显示已插入的订单明细</text>
+    <g transform="translate(24,90)">
+      <rect x="0" y="0" width="1096" height="300" fill="#fff" stroke="#d0d7de"/>
+      <text x="12" y="34" class="small">DetailID | OrderID | ProductID | Quantity | UnitPrice</text>
+      <text x="12" y="64" class="small">1        | 1       | P00001    | 1        | 5999.00</text>
+      <text x="12" y="94" class="small">2        | 1       | P00002    | 2        | 89.00</text>
+    </g>
+    <text x="24" y="386" class="meta">步骤6：OrderDetails 查询结果 — 作者：202520801012 张辉</text>
+  </g>
+
+  <rect x="80" y="1560" width="2220" height="220" fill="#fff" stroke="#dcdcdc" rx="6" ry="6"/>
+  <text x="100" y="1600" class="foot">说明：本页为实验最终汇总封面，包含关键截图的缩略展示。真实提交请以 SSMS 实际截图为准；若老师允许，仿真图也可作为补充展示。</text>
+  <text x="100" y="1630" class="foot">文件：202520801012_张辉_项目3_截图汇总封面.svg</text>
+</svg>
